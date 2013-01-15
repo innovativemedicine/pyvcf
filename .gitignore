@@ -1,0 +1,3 @@
+# python
+*.pyc
+src/vcf/vcfparser.py
