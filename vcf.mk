@@ -10,4 +10,5 @@ all: src/vcf/vcfparser.py
 
 src/vcf/vcfparser.py: src/vcf/vcfparser.g
 	$(3RDPARTY_SCRIPTS)/yapps2.py $<
-	chmod +x $@
+	$(eval VCFPARSER := $$(patsubst %.g,%.py,$$<))
+	chmod +x $(VCFPARSER)
