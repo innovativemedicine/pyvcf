@@ -1,10 +1,13 @@
-# http://www.regular-expressions.info/floatingpoint.html
 import vcfparser
 import re
 import yapps
+import hackparser
+
+def parse(rule, text):
+    return hackparser.parse(rule, text)
 
 # same as the default parse function generated in vcfparser.py, but also re-raises the exception
-def parse(rule, text): 
+def yapps_parse(rule, text): 
     parser = vcfparser.VCF(vcfparser.VCFScanner(text))
     def _wrap_error_reporter(rule, *args,**kw):
         try:
