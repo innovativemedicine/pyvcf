@@ -16,7 +16,7 @@ p_end = r'$'
 p_identifier = r"[a-zA-Z][a-zA-Z0-9]*"
 p_nucleotides = r"[ACGTN]+"
 p_info_str = r"[^,;\n]+"
-p_phase = "{slash}|{bar}".format(slash=p_slash, bar=p_bar)
+p_phase = "%(slash)s|%(bar)s" % { 'slash':p_slash, 'bar':p_bar }
 
 def anchor(restr):
     return "^" + restr + "$"
@@ -64,7 +64,7 @@ def parse(name, string):
     return parser(string)
 
 def attr_restr(value_restr):
-    return "(?P<attr>{attr_restr})(?:=(?P<value>{value_restr}))?".format(attr_str=r"[a-zA-Z]+", value_restr=value_restr)
+    return "(?P<attr>%(attr_restr)s)(?:=(?P<value>%(value_restr)s))?" % { 'attr_str':r"[a-zA-Z]+", 'value_restr':value_restr }
 
 typeable_as = {
         None: frozenset([int, float, bool, str]),
@@ -217,7 +217,7 @@ def parse_either(parser1, parser2, string):
         return parser2(string)
 
 def _on_fail(regex, string):
-    raise ParserException("Failed to parse {string} using {regex}".format(string=string, regex=re_to_p.get(regex, regex)))
+    raise ParserException("Failed to parse %(string)s using %(regex)s" % { 'string':string, 'regex':re_to_p.get(regex, regex) })
 def _on_success(match, string):
     return string
 def match(regex, string, on_success=_on_success, on_fail=_on_fail):
