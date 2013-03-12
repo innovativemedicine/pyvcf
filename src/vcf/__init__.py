@@ -3,6 +3,8 @@ import re
 import yapps
 import hackparser
 
+from file import vcf_file
+
 def parse(rule, text):
     return hackparser.parse(rule, text)
 
