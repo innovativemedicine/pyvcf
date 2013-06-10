@@ -1,4 +1,3 @@
-import vcfparser
 import re
 import yapps
 import hackparser
@@ -10,6 +9,7 @@ def parse(rule, text):
 
 # same as the default parse function generated in vcfparser.py, but also re-raises the exception
 def yapps_parse(rule, text): 
+    import vcfparser
     parser = vcfparser.VCF(vcfparser.VCFScanner(text))
     def _wrap_error_reporter(rule, *args,**kw):
         try:
